@@ -8,6 +8,7 @@ hostfiles
 loss_files
 other-results
 *.png
+!average_per_register_dec2024.png
 
 configs/*
 !configs/template*.yml
