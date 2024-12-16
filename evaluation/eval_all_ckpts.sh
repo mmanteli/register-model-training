@@ -24,19 +24,19 @@ evaluation="multiple"
 echo $REGISTER
 export TRANSFORMERS_CACHE="/scratch/project_462000353/cache"
 export HF_HOME="/scratch/project_462000353/cache"
-
+DIR="/scratch/project_462000353/amanda/register-training"
 
 for i in `seq 1000 1000 14000`; do
     echo "START ckpt ${i}: $(date)"
-    model_to_evaluate="checkpoints_converted/8N/${REGISTER}/global_step${i}"
-    srun python /scratch/project_462000353/amanda/register-training/pythonuserbase/bin/lighteval accelerate \
+    model_to_evaluate="${DIR}/checkpoints_converted/8N/${REGISTER}/global_step${i}"
+    srun python ${DIR}/pythonuserbase/bin/lighteval accelerate \
         --model_args "pretrained=${model_to_evaluate},tokenizer=gpt2" \
-        --tasks "/scratch/project_462000353/amanda/register-training/register-model-training/evaluation/${evaluation}.txt" \
+        --tasks "${DIR}/register-model-training/evaluation/${evaluation}.txt" \
         --output_dir eval_results/${evaluation}/ \
         --override_batch_size 16
 
-    default_location=$(echo $model_to_evaluate | tr "/" "_" )
-    new_location="${default_location#*_*_*_*_}"   # this results in "IP_global_stepXXXX
+    default_location=$(echo $model_to_evaluate | tr "/" "_" )   # this is what lighteval gives
+    new_location=$(echo $default_location | rev | cut -f 1-3 -d"_" | rev)  # this results in "IP_global_stepXXXX
     new_save_path=eval_results/${evaluation}/${REGISTER}/${new_location}/
     mkdir -p $new_save_path
     mv eval_results/${evaluation}/results/$default_location/* $new_save_path
