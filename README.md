@@ -50,7 +50,7 @@ and then activate as
 ```
 module use /appl/local/csc/modulefiles
 module load pytorch
-export PYTHONPATH=/scratch/project_462000353/amanda/register-training/pythonuserbase/lib/python3.10/site-packages:$PYTHONPATH
+export PYTHONPATH=<path to>/pythonuserbase/lib/python3.10/site-packages:$PYTHONPATH
 ```
 
 ``evaluate.sh`` mostly for testing. ``eval_all_checkpoints.sh`` loops over all checkpoints of a register and evaluates all tasks in a given in a .txt file. 
