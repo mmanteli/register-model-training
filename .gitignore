@@ -1,6 +1,7 @@
 venv
 .venv
 .ipynb_checkpoints
+__pycache__
 logs
 eval_results
 
@@ -12,3 +13,5 @@ other-results
 
 configs/*
 !configs/template*.yml
+
+sampling/results
