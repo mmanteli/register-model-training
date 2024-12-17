@@ -44,7 +44,7 @@ limits_en = {
 	"no-label": 1,
 	"HI-IN": 1,
 }
-limits = {"en": limits_en}
+limits = {"eng_Latn": limits_en}
 
 # this for testing
 label_counts={k:0 for k in registers}
