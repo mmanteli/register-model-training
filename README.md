@@ -12,13 +12,25 @@ Dump for training small llama-style models with register filtered data on LUMI. 
 
 ## Get started
 
+### ``sampling``
+
+Once you have access to data in ``.jsonl`` format, and their labels, you can run ``run_sample.sh`` to get data in the format 
+
+```
+{"id": <id>, "text": <text>, "labels": <full classification label>}
+```
+
+For now, the labels and texts are assumed to be in separate files which are together piped to ``sample.py``. ``run_sample.sh`` takes in two params, the split numbers to iterate over, since out data is splitted for now.
+
+``sample.py`` checks that prediction and text ids match, parses the label, and outputs the results to correct file for each register. 
+
 ### ``configs``
 
-Contains a template that can be modified for any register simpy by 
+Contains a template that can be modified for any register simply by 
 
 ```sed "s/{{REGISTER}}/${REGISTER}/g" $path_to_TEMPLATE > $new_CONFIG```
 
- (as seen in ``training/train.py``). See [this](https://github.com/EleutherAI/gpt-neox/blob/main/configs/neox_arguments.md) for parameter explanations. In training, assumed location of configs is ``register-training/register-model-training/configs/{{REGISTER}}_1_82B_8N.yml``
+ (as seen in ``training/train.py``). See [this](https://github.com/EleutherAI/gpt-neox/blob/main/configs/neox_arguments.md) for parameter explanations. In training, assumed location of configs is ``register-model-training/configs/{{REGISTER}}_1_82B_8N.yml``
 
 ### ``training/tokenize.sh``
 
@@ -54,3 +66,8 @@ export PYTHONPATH=<path to>/pythonuserbase/lib/python3.10/site-packages:$PYTHONP
 ```
 
 ``evaluate.sh`` mostly for testing. ``eval_all_checkpoints.sh`` loops over all checkpoints of a register and evaluates all tasks in a given in a .txt file. 
+
+
+## NOTES
+
+Note that this one uses quite a lot of full paths etc., so change them accordingly. I have done my best to parametrise them as well, but somethings might have been missed.
