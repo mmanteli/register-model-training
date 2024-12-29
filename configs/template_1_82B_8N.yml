@@ -10,7 +10,7 @@
   #Tokenizer
   "make_vocab_size_divisible_by": 1,
   "tokenizer_type": "GPT2BPETokenizer",
-  "data_path": "/scratch/project_462000353/HPLT-REGISTERS/samples-30B-by-register-p/tokenized/{{REGISTER}}/eng_Latn_text_document",
+  "data_path": "/scratch/project_462000353/HPLT-REGISTERS/samples-150B-by-register-xlmrl/tokenized/{{REGISTER}}/eng_Latn_text_document",
   "vocab_file": "/scratch/project_462000353/tokenizers/gpt2/vocab.json",
   "merge_file": "/scratch/project_462000353/tokenizers/gpt2/merges.txt",
 
@@ -91,13 +91,13 @@
 
   #Checkpoints
   "checkpoint_factor": 1000,
-  "save": "/scratch/project_462000353/amanda/register-training/checkpoints/8N/{{REGISTER}}",
-  "load": "/scratch/project_462000353/amanda/register-training/checkpoints/8N/{{REGISTER}}",
+  "save": "/scratch/project_462000353/amanda/register-training/checkpoints-150B/8N/{{REGISTER}}",
+  "load": "/scratch/project_462000353/amanda/register-training/checkpoints-150B/8N/{{REGISTER}}",
 
   # logging
   "log_interval": 10,
   "steps_per_print": 100,
-  "tensorboard_dir": "/scratch/project_462000353/amanda/register-training/logs/tb/neox-register-{{REGISTER}}/",
+  "tensorboard_dir": "/scratch/project_462000353/amanda/register-training/logs/tb/neox-register-150B-{{REGISTER}}/",
   "log_grad_pct_zeros": True,
   "log_grad_norm": True,
   "log_gradient_noise_scale": False, #Gradient Noise Scale logging does not work with zero stage 2+, as the gradients are distributed across ranks.

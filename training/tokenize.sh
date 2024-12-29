@@ -1,23 +1,23 @@
 #!/bin/bash
-#SBATCH -A project_462000353
+#SBATCH -A project_462000449
 #SBATCH -p small
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=64
-#SBATCH --mem=200G
-#SBATCH -t 4:00:00
+#SBATCH --cpus-per-task=128
+#SBATCH --mem=480G
+#SBATCH -t 23:50:00
 #SBATCH -N 1
-#SBATCH -J tokenisation_dtp
+#SBATCH -J tokenisation_corr_missing
 #SBATCH -o logs/%x-%j.out
 
 address="/scratch/project_462000353/amanda/register-training/gpt-neox"
-register="dtp"
+register=$1
 lang="eng_Latn"
 module purge
 module load pytorch
 
-echo "USING ${SLURM_CPUS_PER_TASK} CPU'S TO TOKENIZE ${register}"
-input="/scratch/project_462000353/HPLT-REGISTERS/samples-30B-by-register-p/${register}/${lang}.jsonl"
-output="/scratch/project_462000353/HPLT-REGISTERS/samples-30B-by-register-p/tokenized/${register}"
+echo "USING ${SLURM_CPUS_PER_TASK} CPU'S TO TOKENIZE ${lang} ${register}"
+input="/scratch/project_462000353/HPLT-REGISTERS/samples-150B-by-register-xlmrl/original_corrected/${lang}_${register}.jsonl"
+output="/scratch/project_462000353/HPLT-REGISTERS/samples-150B-by-register-xlmrl/tokenized/${register}"
 
 
 if [ ! -e $input ]; then
@@ -40,6 +40,6 @@ srun singularity exec $SIF python ${address}/tools/datasets/preprocess_data.py \
             --merge-file=/scratch/project_462000353/tokenizers/gpt2/merges.txt \
             --append-eod \
             --workers=$SLURM_CPUS_PER_TASK \
-            --log-interval=100000 \
+            --log-interval=1000000 \
             --output-prefix="${output}/${lang}"
-sactt --format="JobId,Elapsed" -j $SLURM_JOB_ID
+sacct --format="JobId,Elapsed" -j $SLURM_JOB_ID
