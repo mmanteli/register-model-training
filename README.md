@@ -1,6 +1,12 @@
 # register-model-training
 Dump for training small llama-style models with register filtered data on LUMI. Idea is to evaluate the quality of different registers as LLM training data. The setup is copied from FineWeb. 
 
+## IMPORTANT
+
+20.1.2025 **There is some problem with the NeoX training setup. Moving away from this repo.**
+
+*** 
+
 <img src="./evaluation/average_per_register_dec2024.png" width="800">
 
 
