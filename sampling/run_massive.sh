@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=rm_large
+#SBATCH --job-name=rm_large_500k
 #SBATCH --account=project_462000353
 #SBATCH --partition=small
 #SBATCH --time=6:20:00
@@ -14,8 +14,9 @@ module load parallel
 
 REGISTER=$1
 lang="eng_Latn"
+word_limit=500000
 
-echo "Removing too large files with limit 600k"
+echo "Removing too large files with word limit ${word_limit}"
 
 data="/scratch/project_462000353/amanda/register-training/register-model-training/sampling/results/${lang}/${REGISTER}"
 #output="/scratch/project_462000353/amanda/register-training/register-model-training/sampling/results_corrected/${lang}/${REGISTER}"
@@ -26,7 +27,7 @@ mkdir -p $output
 echo "Start: $(date)"
 
 #for filename in ${data}/*[0-9].jsonl; do  # ending in number so that no combination files are taken into if they exist
-cat ${data}/*[0-9].jsonl | parallel --pipe -j128 python3 remove_massive_jsonl.py > ${output}/${lang}_${REGISTER}_less_than_600k.jsonl
+cat ${data}/*[0-9].jsonl | parallel --pipe -j128 python3 remove_massive_jsonl.py $word_limit > ${output}/${lang}_${REGISTER}_length_filtered.jsonl
 #done
 
 
