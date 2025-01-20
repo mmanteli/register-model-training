@@ -6,7 +6,7 @@ logs
 eval_results
 
 hostfiles
-loss_files
+loss_files*
 other-results
 *.png
 !average_per_register_dec2024.png
@@ -16,3 +16,5 @@ configs/*
 
 sampling/results
 sampling/concat.sh
+
+distribution_results

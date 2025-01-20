@@ -6,9 +6,9 @@
 #SBATCH --mem=480G
 #SBATCH --exclusive
 #SBATCH --partition=standard-g
-#SBATCH --time=11:59:00
+#SBATCH --time=23:59:00
 #SBATCH --gpus-per-node=8
-#SBATCH --account=project_462000449
+#SBATCH --account=project_462000353
 #SBATCH --output=logs/%x-%j.out
 #SBATCH --error=logs/%x-%j.err
 
@@ -29,7 +29,8 @@ export EBU_USER_PREFIX=/projappl/project_462000353/Easybuild
 module load LUMI partition/G
 module load PyTorch/2.3.0pytorch-2.3.0-rocm-6.2.0-python-3.10
 
-export TRANSFORMERS_CACHE=$HF_HOME #/scratch/project_462000353/amanda/cache #Change this
+export TRANSFORMERS_CACHE=/scratch/project_462000353/transformers_cache
+# $HF_HOME #/scratch/project_462000353/amanda/cache #Change this
 
 #LOGGING VERBOSITY
 export SINGULARITYENV_TRANSFORMERS_NO_ADVISORY_WARNINGS=1

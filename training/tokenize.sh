@@ -1,12 +1,13 @@
 #!/bin/bash
-#SBATCH -A project_462000449
+#SBATCH -A project_462000353
 #SBATCH -p small
 #SBATCH --ntasks-per-node=1
+##SBATCH --gpus-per-node=1
 #SBATCH --cpus-per-task=128
-#SBATCH --mem=480G
-#SBATCH -t 23:50:00
+#SBATCH --mem=400G
+#SBATCH -t 10:50:00
 #SBATCH -N 1
-#SBATCH -J tokenisation_corr_missing
+#SBATCH -J tokenisation_IN_and_no-label_filterd_by_length
 #SBATCH -o logs/%x-%j.out
 
 address="/scratch/project_462000353/amanda/register-training/gpt-neox"
@@ -16,7 +17,7 @@ module purge
 module load pytorch
 
 echo "USING ${SLURM_CPUS_PER_TASK} CPU'S TO TOKENIZE ${lang} ${register}"
-input="/scratch/project_462000353/HPLT-REGISTERS/samples-150B-by-register-xlmrl/original_corrected/${lang}_${register}.jsonl"
+input="/scratch/project_462000353/HPLT-REGISTERS/samples-150B-by-register-xlmrl/original_corrected/${lang}_${register}_less_than_600k.jsonl" #eng_Latn_no-label_less_than_600k.jsonl
 output="/scratch/project_462000353/HPLT-REGISTERS/samples-150B-by-register-xlmrl/tokenized/${register}"
 
 

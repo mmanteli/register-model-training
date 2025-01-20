@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define input and output directories for all registers
-INPUT_DIR="/scratch/project_462000353/amanda/register-training/checkpoints/8N/{{REGISTER}}"
+INPUT_DIR="/scratch/project_462000353/amanda/register-training/checkpoints-150B/8N/{{REGISTER}}"
 
 
 for register in dtp HI ID IN IP NA ne OP; do
