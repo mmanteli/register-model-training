@@ -77,11 +77,10 @@ dtype         : {dtype.__name__}
 sequence_count: {sequence_count}
 document_count: {document_count}
 sequence_lengths (shape {sequence_lengths.shape}): {sequence_lengths}
-total_sequences: {millify(np.sum(sequence_lengths))}
+total_sequences: {millify(np.sum(sequence_lengths))}, ({np.sum(sequence_lengths)})
 sequence_pointers (shape {sequence_pointers.shape}): {sequence_pointers}
 document_indices (shape {document_indices.shape}): {document_indices}''', file=sys.stderr)
 
-    exit()
     # Load and print decoded .bin records
     with open(binfn, 'rb') as f:
         stop = args.stop if args.stop is not None else sequence_count

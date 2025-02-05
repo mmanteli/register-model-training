@@ -1,12 +1,12 @@
 #!/bin/bash
-#SBATCH --job-name=register-llama-1.8B
-#SBATCH --nodes=8
+#SBATCH --job-name=TEST-IN-register-llama-1.8B
+#SBATCH --nodes=1
 #SBATCH --ntasks-per-node=8
 #SBATCH --cpus-per-task=7
 #SBATCH --mem=480G
 #SBATCH --exclusive
-#SBATCH --partition=standard-g
-#SBATCH --time=23:59:00
+#SBATCH --partition=dev-g
+#SBATCH --time=00:29:00
 #SBATCH --gpus-per-node=8
 #SBATCH --account=project_462000353
 #SBATCH --output=logs/%x-%j.out

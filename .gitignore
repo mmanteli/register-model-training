@@ -2,7 +2,7 @@ venv
 .venv
 .ipynb_checkpoints
 __pycache__
-logs
+logs*
 eval_results
 
 hostfiles

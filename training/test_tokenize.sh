@@ -1,14 +1,14 @@
 #!/bin/bash
 #SBATCH -A project_462000615
-#SBATCH -p small
+#SBATCH -p debug
 #SBATCH --ntasks-per-node=1
 ##SBATCH --gpus-per-node=1
 #SBATCH --cpus-per-task=128
-#SBATCH --mem=480G
-#SBATCH -t 10:30:00
+#SBATCH --mem=0
+#SBATCH -t 00:10:00
 #SBATCH -N 1
-#SBATCH -J IN-500k-tokenize
-#SBATCH -o logs_for_tok_test/%x-%j.out
+#SBATCH -J test-tokenisation
+#SBATCH -o logs/%x.out
 
 address="/scratch/project_462000353/amanda/register-training/gpt-neox"
 register="IN"
@@ -17,8 +17,8 @@ module purge
 module load pytorch
 
 echo "USING ${SLURM_CPUS_PER_TASK} CPU'S TO TOKENIZE ${lang} ${register}"
-input="/scratch/project_462000353/HPLT-REGISTERS/samples-150B-by-register-xlmrl/original_corrected/eng_Latn_IN_less_than_500k_and_problem_removed.jsonl" #eng_Latn_no-label_less_than_600k.jsonl
-output="/scratch/project_462000353/HPLT-REGISTERS/samples-150B-by-register-xlmrl/tokenized/${register}_500k_no_problem"
+input="/scratch/project_462000353/HPLT-REGISTERS/samples-150B-by-register-xlmrl/original_corrected/${lang}_${register}_less_than_600k.jsonl" #eng_Latn_no-label_less_than_600k.jsonl
+output="/scratch/project_462000353/HPLT-REGISTERS/samples-150B-by-register-xlmrl/tokenized/${register}_new"
 #input="/scratch/project_462000353/HPLT-REGISTERS/samples-150B-by-register-xlmrl/original_corrected/${lang}_${register}_with_th_1.jsonl"
 #output="/scratch/project_462000353/HPLT-REGISTERS/samples-150B-by-register-xlmrl/tokenized/${register}"
 
